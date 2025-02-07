@@ -24,3 +24,7 @@ Features:
 * groundtruth: depressive episode labeling
 
 # 3. Exploratory data analysis
+* Attributing a score for the app being used by the user (eg. twitter, flower game) and cross correlate with the time of the day being used
+* Evaluate feature importance for AU's using random forest
+* SVM model training
+* phone unlock frequency 
