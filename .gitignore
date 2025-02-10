@@ -1,4 +1,3 @@
 /dataset/data/
-
-dataset/processed/features_processed.csv
-dataset/processed/features_raw.csv
+/dataset/processed/features_processed.csv
+/dataset/processed/features_raw.csv
