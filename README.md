@@ -26,11 +26,26 @@ A participant observation period (i.e., 2 weeks) is labeled as having a depressi
 - handle missing data (interpolation, mean..)
 - normalize features to ensure consistency for ML model training
 - convert categorical data to numerical values
+- merge dataset with groundtruth on pid, start and end date
 
 # 3. Exploratory data analysis
 * Attributing a score for the app being used by the user (eg. twitter, flower game) and cross correlate with the time of the day being used
 * Evaluate feature importance for AU's using random forest
-* SVM model training
-* phone unlock frequency 
+- feature distribution using histograms
+- heatmap correlation analysis
 
-# 4. feature engineering
+# 4. Feature engineering
+- group the numeric features by using the mean value over the range of the time period of each pid
+- explore time series data for comparison
+
+# 5. Data splitting 
+since our dataset is very small its best to perform cross validation 
+
+# 6. Model selection and training
+its a binary classification problem therefore we can use "logistic regression","random forest", "XGBoost", "SVM"
+
+# 7. Model Evaluation
+predict the accuracy of our model (accuracy % and AUC)
+Random forest performed best with Cross-validation AUC-ROC: 0.8533 ± 0.1293
+
+

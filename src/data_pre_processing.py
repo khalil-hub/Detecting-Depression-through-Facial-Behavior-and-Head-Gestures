@@ -84,17 +84,12 @@ key_features=["classification_smilingProbability", "au_AU01", "au_AU02", "au_AU0
 X_data=merged_df[key_features]
 target=["depression_episode"]
 y_data=merged_df[target]
-# Split into training (80%) and testing (20%) sets
-X_train, X_test, y_train, y_test = train_test_split(X_data, y_data, test_size=0.2, random_state=42)
 #save to csv
-csv_path=os.path.join(csv_dir, "X_train.csv")
-X_train.to_csv(csv_path, index=False)
-csv_path=os.path.join(csv_dir, "X_test.csv")
-X_test.to_csv(csv_path, index=False)
-csv_path=os.path.join(csv_dir, "y_train.csv")
-y_train.to_csv(csv_path, index=False)
-csv_path=os.path.join(csv_dir, "y_test.csv")
-y_test.to_csv(csv_path, index=False)
+csv_path=os.path.join(csv_dir, "X.csv")
+X_data.to_csv(csv_path, index=False)
+csv_path=os.path.join(csv_dir, "y.csv")
+y_data.to_csv(csv_path, index=False)
+
 
 
 
