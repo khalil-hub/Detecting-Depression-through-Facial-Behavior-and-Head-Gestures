@@ -2,7 +2,7 @@ from sklearn.model_selection import cross_val_score
 import os
 import joblib
 
-def evaluate_model(model_path, scaler_path, X, y, log_path, cv=5):
+def evaluate_ml_model(model_path, scaler_path, X, y, log_path, cv=5):
 
     # Load model & scaler
     model = joblib.load(model_path)
