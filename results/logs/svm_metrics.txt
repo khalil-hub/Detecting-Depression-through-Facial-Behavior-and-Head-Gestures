@@ -1,1 +1,3 @@
-Cross-Validation AUC-ROC: 0.8333 ± 0.1787
+LOPO-CV AUROC: 0.5238 ± 0.1875
+LOPO-CV Accuracy: 0.8571 ± 0.2736
+LOPO-CV Precision: 0.2857 ± 0.4518

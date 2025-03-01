@@ -49,3 +49,7 @@ predict the accuracy of our model (accuracy % and AUC)
 Random forest performed best with Cross-validation AUC-ROC: 0.8533 ± 0.1293
 
 
+Remarks
+- check leave one out cross validation
+- check the correlation matric for time series 
+- 

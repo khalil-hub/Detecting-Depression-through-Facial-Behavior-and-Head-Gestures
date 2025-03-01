@@ -86,26 +86,61 @@ def data_merge_timeseries(groundtruth, df, timeseries_data_path):
     filtered_df.to_csv(timeseries_data_path, index=False)
 
 def create_sequences(data, sequence_path_X, sequence_path_y, TIME_STEPS):
-    #Convert time-series data into sequences for deep learning models
+    """
+    Convert time-series data into sequences for deep learning models.
+
+    Args:
+        data (pd.DataFrame): Processed time-series DataFrame.
+        sequence_path_X (str): Path to save input sequences.
+        sequence_path_y (str): Path to save target labels.
+        TIME_STEPS (int): Number of timesteps for each sequence.
+
+    Returns:
+        None (Saves NumPy arrays)
+    """
+
+    # ✅ Define Relevant Features
+    key_features = [
+        "classification_smilingProbability", "classification_leftEyeOpenProbability",
+        "classification_rightEyeOpenProbability", "headEulerAngle_X", "headEulerAngle_Y", "headEulerAngle_Z",
+        "au_AU01", "au_AU02", "au_AU04", "au_AU06", "au_AU07", "au_AU12", "au_AU15", "au_AU17"
+    ]
+
     sequences, labels = [], []
+    
+    # ✅ Ensure Data is Sorted
     for pid in data["pid"].unique():
         participant_data = data[data["pid"] == pid].sort_values(by="date")
+
+        # ✅ Drop Missing Values in Key Features
+        participant_data = participant_data.dropna(subset=key_features + ["depression_episode"])
+
+        # ✅ Generate Sequences
         for i in range(len(participant_data) - TIME_STEPS):
-            seq = participant_data.iloc[i:i+TIME_STEPS, 2:-1].values  # Select feature columns
-            label = participant_data.iloc[i+TIME_STEPS, -1]  # Target column
+            seq = participant_data.iloc[i:i+TIME_STEPS][key_features].values  # Extract sequence
+            label = participant_data.iloc[i+TIME_STEPS]["depression_episode"]  # Extract label
+
             sequences.append(seq)
             labels.append(label)
-    # Convert to NumPy array and save
-    X = np.array(sequences)
-    y = np.array(labels)
+
+    # ✅ Convert to NumPy Arrays
+    X = np.array(sequences, dtype=np.float32)
+    y = np.array(labels, dtype=np.int64)  # Ensures labels are integers
+
+    # ✅ Save Sequences
     np.save(sequence_path_X, X)
     np.save(sequence_path_y, y)
+    
+    print(f"✅ Saved {len(X)} sequences to {sequence_path_X}")
+    print(f"✅ Saved {len(y)} labels to {sequence_path_y}")
 
-def feature_target_timeseries(merged_data, X_sequence_path, y_sequence_path, TIME_STEPS):
+
+"""def feature_target_timeseries(data, X_sequence_path, y_sequence_path, TIME_STEPS):
+    #investigate which features are most important for time series
     #Extract time-series features and save in sequence format for DL models
     key_features = ["classification_smilingProbability", "au_AU01", "au_AU02", "au_AU06"]
     target = ["depression_episode"]
     # Select relevant columns
-    merged_data = merged_data[["pid", "date"] + key_features + target]
+    data = data[["pid", "date"] + key_features + target]
     # Convert to sequences
-    create_sequences(merged_data, X_sequence_path, y_sequence_path, TIME_STEPS)
+    create_sequences(data, X_sequence_path, y_sequence_path, TIME_STEPS)"""

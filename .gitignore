@@ -1,3 +1,4 @@
 /dataset/data/
 /dataset/processed/features_pre_processed.csv
 /dataset/processed/features_raw.csv
+/dataset/sequences/sequence_X.npy
